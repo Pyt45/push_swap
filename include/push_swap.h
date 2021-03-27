@@ -40,4 +40,5 @@ int					back(t_stack *stack);
 void    			do_op(t_ps_env *ps_env, char *line);
 void				swap_a(t_ps_env *ps_env);
 t_stack				*getStack(t_stack **root, int data);
+void				rotate_a(t_ps_env *ps_env);
 #endif

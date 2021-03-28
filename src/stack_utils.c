@@ -30,6 +30,25 @@ void	push_back(t_stack **root, int data)
 	new->prev = tmp;
 }
 
+void	push_front(t_stack **root, int data)
+{
+	t_stack *tmp;
+	t_stack *new;
+
+	tmp = *root;
+	new = create_stack(data);
+	if (!(*root))
+	{
+		(*root) = new;
+		return ;
+	}
+	// |1| -----> |2| -> |1|
+	(*root)->prev = new;
+	new->next = (*root);
+
+	(*root) = new;
+}
+
 t_stack		*getStack(t_stack **root, int data)
 {
 	t_stack		*stack;

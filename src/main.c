@@ -1,15 +1,15 @@
 #include "../include/push_swap.h"
 
-void	printStack(t_stack *stack)
+void	print_stack_a(t_ps_env *ps_env)
 {
-	t_stack *tmp;
+	t_stack *tmp = ps_env->stack_a;
 
 	printf("Init a and b:\n");
-	while (stack)
+	while (tmp)
 	{
-		printf("%d\n", stack->data);
-		tmp = stack;
-		stack = stack->next;
+		printf("%d\n", tmp->data);
+		tmp = tmp->next;
+		// ps_env->stack_a = ps_env->stack_a->next;
 	}
 	printf("- -\n");
 	printf("a b\n");

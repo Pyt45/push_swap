@@ -46,30 +46,78 @@ void    rotate_a(t_ps_env *ps_env)
 	ps_env->stack_a = new_head;
 }
 
+void    push_b(t_ps_env *ps_env)
+{
+    // if (!ps_env->stack_b)
+    push_back(&ps_env->stack_b, ps_env->stack_a->data);
+    return ;
+}
+
+void    push_a(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    rotate_b(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    swap_b(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    swap_both(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    reverse_rotate_a(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    reverse_rotate_b(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    reverse_rotate_both(t_ps_env *ps_env)
+{
+    return ;
+}
+
+void    rotate_both(t_ps_env *ps_env)
+{
+    return ;
+}
+
+
 void    do_op(t_ps_env *ps_env, char *line)
 {
     if (!strcmp(line, "sa"))
         swap_a(ps_env);
     else if (!strcmp(line, "ra"))
         rotate_a(ps_env);
-    // else if (!strcmp(line, "rra"))
-    //     reverse_rotate_a(ps_env);
-    // else if (!strcmp(line, "pa"))
-    //     push_a(ps_env);
-    // else if (!strcmp(line, "sb"))
-    //     swap_b(ps_env);
-    // else if (!strcmp(line, "rb"))
-    //     rotate_b(ps_env);
-    // else if (!strcmp(line, "rrb"))
-    //     reverse_rotate_b(ps_env);
-    // else if (!strcmp(line, "pb"))
-    //     push_b(ps_env);
-    // else if (!strcmp(line, "ss"))
-    //     swap_both(ps_env);
-    // else if (!strcmp(line, "rr"))
-    //     rotate_both(ps_env);
-    // else if (!strcmp(line, "rrr"))
-    //     reverse_rotate_both(ps_env);
+    else if (!strcmp(line, "rra"))
+        reverse_rotate_a(ps_env);
+    else if (!strcmp(line, "pa"))
+        push_a(ps_env);
+    else if (!strcmp(line, "sb"))
+        swap_b(ps_env);
+    else if (!strcmp(line, "rb"))
+        rotate_b(ps_env);
+    else if (!strcmp(line, "rrb"))
+        reverse_rotate_b(ps_env);
+    else if (!strcmp(line, "pb"))
+        push_b(ps_env);
+    else if (!strcmp(line, "ss"))
+        swap_both(ps_env);
+    else if (!strcmp(line, "rr"))
+        rotate_both(ps_env);
+    else if (!strcmp(line, "rrr"))
+        reverse_rotate_both(ps_env);
     else
         return ;
 }
@@ -83,7 +131,7 @@ void    start_checker(t_ps_env *ps_env)
     i = 0;
     while (++i < ps_env->argc)
         push_back(&ps_env->stack_a, atoi(ps_env->argv[i]));
-    printStack(ps_env->stack_a);
+    print_stack_a(ps_env);
     r = get_next_line(0, &line);
     while (r)
     {
@@ -94,6 +142,6 @@ void    start_checker(t_ps_env *ps_env)
     }
     // printf("%d\n", back(ps_env->stack_a));
 	// printf("l = %d\n", getStack(&ps_env->stack_a, back(ps_env->stack_a))->data);
-    printStack(ps_env->stack_a);
+    print_stack_a(ps_env);
    // printf("%s\n", line);
 }

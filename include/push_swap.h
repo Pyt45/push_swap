@@ -33,7 +33,7 @@ typedef struct		s_ps_env
 
 t_stack     		*create_stack(int data);
 void				push_back(t_stack **root, int data);
-void				printStack(t_stack *stack);
+void				print_stack_a(t_ps_env *ps_env);
 void    			start_checker(t_ps_env *ps_env);
 t_ps_env    		*init_checker(int argc, char **argv);
 int					back(t_stack *stack);

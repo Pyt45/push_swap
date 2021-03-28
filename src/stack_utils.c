@@ -37,7 +37,7 @@ t_stack		*getStack(t_stack **root, int data)
 	stack = *root;
 	while (stack)
 	{
-		if (stack->data = data)
+		if (stack->data == data)
 			return stack;
 		stack = stack->next;
 	}

@@ -52,6 +52,24 @@ void    do_op(t_ps_env *ps_env, char *line)
         swap_a(ps_env);
     else if (!strcmp(line, "ra"))
         rotate_a(ps_env);
+    // else if (!strcmp(line, "rra"))
+    //     reverse_rotate_a(ps_env);
+    // else if (!strcmp(line, "pa"))
+    //     push_a(ps_env);
+    // else if (!strcmp(line, "sb"))
+    //     swap_b(ps_env);
+    // else if (!strcmp(line, "rb"))
+    //     rotate_b(ps_env);
+    // else if (!strcmp(line, "rrb"))
+    //     reverse_rotate_b(ps_env);
+    // else if (!strcmp(line, "pb"))
+    //     push_b(ps_env);
+    // else if (!strcmp(line, "ss"))
+    //     swap_both(ps_env);
+    // else if (!strcmp(line, "rr"))
+    //     rotate_both(ps_env);
+    // else if (!strcmp(line, "rrr"))
+    //     reverse_rotate_both(ps_env);
     else
         return ;
 }

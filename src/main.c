@@ -9,13 +9,12 @@ void	print_stack_a(t_ps_env *ps_env)
 	while (tmp_a)
 	{
 		if (tmp_b)
-		{
-			printf("%d %d\n", tmp_a->data, tmp_b);
-			tmp_b = tmp_b->next;
-		}
+			printf("%d %d\n", tmp_a->data, tmp_b->data);
 		else
 			printf("%d\n", tmp_a->data);
+		(tmp_b) ? tmp_b = tmp_b->next : 0;
 		tmp_a = tmp_a->next;
+		//(tmp_b) ? tmp_b->next : 0;
 		// ps_env->stack_a = ps_env->stack_a->next;
 	}
 	printf("- -\n");

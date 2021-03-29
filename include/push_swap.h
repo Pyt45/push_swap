@@ -28,6 +28,7 @@ typedef struct		s_ps_env
 	t_stack			*stack_b;
 	t_inst			*inst;
 	int				argc;
+	int				visual;
 	char			**argv;
 }					t_ps_env;
 

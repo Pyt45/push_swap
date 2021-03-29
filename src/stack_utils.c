@@ -29,7 +29,7 @@ void	push_back(t_stack **root, int data)
 	tmp->next = new;
 	new->prev = tmp;
 }
-
+// |1| --> |2| --> |3|
 void	push_front(t_stack **root, int data)
 {
 	t_stack *tmp;
@@ -42,10 +42,9 @@ void	push_front(t_stack **root, int data)
 		(*root) = new;
 		return ;
 	}
-	// |1| -----> |2| -> |1|
-	(*root)->prev = new;
-	new->next = (*root);
 
+	new->next = (*root);
+	(*root)->prev = new;
 	(*root) = new;
 }
 

@@ -5,6 +5,7 @@ void	print_stack_a(t_ps_env *ps_env)
 	t_stack *tmp_a = ps_env->stack_a;
 	t_stack *tmp_b = ps_env->stack_b;
 
+	printf("-------------------------------------------------\n");
 	printf("Init a and b:\n");
 	while (tmp_a)
 	{
@@ -19,6 +20,7 @@ void	print_stack_a(t_ps_env *ps_env)
 	}
 	printf("- -\n");
 	printf("a b\n");
+	printf("-------------------------------------------------\n");
 	// while (tmp)
 	//{
 	//	printf("stack-prev(%d) : %d\n", i--, tmp->data);

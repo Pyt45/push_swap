@@ -16,6 +16,8 @@ t_ps_env    *init_checker(int argc, char **argv)
     ps_env->argc = argc;
     ps_env->argv = argv;
     ps_env->visual = 0;
+    ps_env->len_a = 0;
+    ps_env->len_b = 0;
 
     return (ps_env);
 }
@@ -41,7 +43,9 @@ void    swap_a(t_ps_env *ps_env)
 
     new_head = ps_env->stack_a->next;
     ps_env->stack_a->next = new_head->next;
+    ps_env->stack_a->next->prev = ps_env->stack_a;
     new_head->next = ps_env->stack_a;
+    ps_env->stack_a->prev = new_head;
     ps_env->stack_a = new_head;
 }
 
@@ -68,6 +72,8 @@ void    push_b(t_ps_env *ps_env)
         push_swap_ko(ps_env);
     t_stack *del;
     push_front(&ps_env->stack_b, ps_env->stack_a->data);
+    ps_env->len_a--;
+    ps_env->len_b++;
     del = ps_env->stack_a;
     if (ps_env->stack_a && ps_env->stack_a->next)
         ps_env->stack_a = ps_env->stack_a->next;
@@ -82,6 +88,8 @@ void    push_a(t_ps_env *ps_env)
     if (!ps_env->stack_b)
         push_swap_ko(ps_env);
     push_front(&ps_env->stack_a, ps_env->stack_b->data);
+    ps_env->len_a++;
+    ps_env->len_b--;
     del = ps_env->stack_b;
     if (ps_env->stack_b && ps_env->stack_b->next)
         ps_env->stack_b = ps_env->stack_b->next;

@@ -29,6 +29,8 @@ typedef struct		s_ps_env
 	t_inst			*inst;
 	int				argc;
 	int				visual;
+	int 			len_a;
+	int 			len_b;
 	char			**argv;
 }					t_ps_env;
 

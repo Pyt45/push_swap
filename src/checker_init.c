@@ -37,16 +37,18 @@ void    push_swap_ko(t_ps_env *ps_env)
 
 void    swap_a(t_ps_env *ps_env)
 {
-    if (!ps_env->stack_a || !ps_env->stack_b->next)
-        destroy_ps_env(ps_env);
+    if (!ps_env->stack_a || !ps_env->stack_a->next)
+        push_swap_ko(ps_env);
     t_stack *new_head;
 
     new_head = ps_env->stack_a->next;
     ps_env->stack_a->next = new_head->next;
-    ps_env->stack_a->next->prev = ps_env->stack_a;
+    // ps_env->stack_a->next->prev = ps_env->stack_a;
     new_head->next = ps_env->stack_a;
     ps_env->stack_a->prev = new_head;
     ps_env->stack_a = new_head;
+	if (ps_env->visual)
+		print_stack_a(ps_env);
 }
 
 void    rotate_a(t_ps_env *ps_env)
@@ -64,6 +66,8 @@ void    rotate_a(t_ps_env *ps_env)
         ps_env->stack_a->prev = tmp;
     ps_env->stack_a->next = NULL;
     ps_env->stack_a = new_head;
+	if (ps_env->visual)
+		print_stack_a(ps_env);
 }
 
 void    push_b(t_ps_env *ps_env)
@@ -72,14 +76,16 @@ void    push_b(t_ps_env *ps_env)
         push_swap_ko(ps_env);
     t_stack *del;
     push_front(&ps_env->stack_b, ps_env->stack_a->data);
-    ps_env->len_a--;
-    ps_env->len_b++;
+    // ps_env->len_a--;
+    // ps_env->len_b++;
     del = ps_env->stack_a;
     if (ps_env->stack_a && ps_env->stack_a->next)
         ps_env->stack_a = ps_env->stack_a->next;
     if (ps_env->stack_a->prev)
         ps_env->stack_a->prev = NULL;
     free(del);
+	if (ps_env->visual)
+		print_stack_a(ps_env);
 }
 
 void    push_a(t_ps_env *ps_env)
@@ -88,14 +94,16 @@ void    push_a(t_ps_env *ps_env)
     if (!ps_env->stack_b)
         push_swap_ko(ps_env);
     push_front(&ps_env->stack_a, ps_env->stack_b->data);
-    ps_env->len_a++;
-    ps_env->len_b--;
+    // ps_env->len_a++;
+    // ps_env->len_b--;
     del = ps_env->stack_b;
     if (ps_env->stack_b && ps_env->stack_b->next)
         ps_env->stack_b = ps_env->stack_b->next;
     if (ps_env->stack_b->prev)
         ps_env->stack_b->prev = NULL;
     free(del);
+	if (ps_env->visual)
+		print_stack_a(ps_env);
 }
 
 void    rotate_b(t_ps_env *ps_env)
@@ -114,18 +122,23 @@ void    rotate_b(t_ps_env *ps_env)
         ps_env->stack_b->prev = tmp;
     ps_env->stack_b->next = NULL;
     ps_env->stack_b = new_head;
+	if (ps_env->visual)
+		print_stack_a(ps_env);
 }
 
 void    swap_b(t_ps_env *ps_env)
 {
-    if (!ps_env->stack_b || !ps_env->stack_b->next)
-        destroy_ps_env(ps_env);
-    t_stack *new_head;
+	if (!ps_env->stack_b || !ps_env->stack_b->next)
+		push_swap_ko(ps_env);
+	t_stack *new_head;
 
     new_head = ps_env->stack_b->next;
     ps_env->stack_b->next = new_head->next;
     new_head->next = ps_env->stack_b;
+	ps_env->stack_a->prev = new_head;
     ps_env->stack_b = new_head;
+	if (ps_env->visual)
+		print_stack_a(ps_env);
 }
 
 void    swap_both(t_ps_env *ps_env)
@@ -151,6 +164,8 @@ void    reverse_rotate_a(t_ps_env *ps_env)
     tmp->prev->next = NULL;
     ps_env->stack_a->prev = tmp;
     ps_env->stack_a = tmp;
+	if (ps_env->visual)
+		print_stack_a(ps_env);
     return ;
 }
 
@@ -168,6 +183,8 @@ void    reverse_rotate_b(t_ps_env *ps_env)
     tmp->prev->next = NULL;
     ps_env->stack_b->prev = tmp;
     ps_env->stack_b = tmp;
+	if (ps_env->visual)
+		print_stack_a(ps_env);
     return ;
 }
 
@@ -231,6 +248,8 @@ void    start_checker(t_ps_env *ps_env)
     i = 1;
     while (++i < ps_env->argc)
         push_back(&ps_env->stack_a, atoi(ps_env->argv[i]));
+    // ps_env->len_a = get_stack_len(ps_env, 'a');
+	ps_env->len_a = 10;
     (ps_env->visual) ? print_stack_a(ps_env) : 0;
     r = get_next_line(0, &line);
     while (r)
@@ -238,7 +257,7 @@ void    start_checker(t_ps_env *ps_env)
         if (!strcmp(line, "end"))
             break ;
         do_op(ps_env, line);
-        (ps_env->visual) ? print_stack_a(ps_env) : 0;
+        // (ps_env->visual) ? print_stack_a(ps_env) : 0;
         r = get_next_line(0, &line);
     }
 }

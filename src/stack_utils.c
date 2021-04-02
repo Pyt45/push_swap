@@ -68,3 +68,19 @@ int		back(t_stack *stack)
 		stack = stack->next;
 	return stack->data;
 }
+
+int 	get_stack_len(t_ps_env *ps_env, char stack_name)
+{
+	int 	len;
+	t_stack *iter;
+
+	len = 0;
+
+	iter = (stack_name == 'a') ? ps_env->stack_a : ps_env->stack_b;
+	while (iter)
+	{
+		len++;
+		iter = iter->next;
+	}
+	return (len);
+}

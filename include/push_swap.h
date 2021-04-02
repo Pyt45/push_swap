@@ -45,4 +45,5 @@ void				swap_a(t_ps_env *ps_env);
 t_stack				*getStack(t_stack **root, int data);
 void				rotate_a(t_ps_env *ps_env);
 void				push_front(t_stack **root, int data);
+int					get_stack_len(t_ps_env *ps_env, char stack_name);
 #endif

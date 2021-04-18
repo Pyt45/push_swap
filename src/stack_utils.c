@@ -32,17 +32,14 @@ void	push_back(t_stack **root, int data)
 // |1| --> |2| --> |3|
 void	push_front(t_stack **root, int data)
 {
-	t_stack *tmp;
 	t_stack *new;
 
-	tmp = *root;
 	new = create_stack(data);
 	if (!(*root))
 	{
 		(*root) = new;
 		return ;
 	}
-
 	new->next = (*root);
 	(*root)->prev = new;
 	(*root) = new;

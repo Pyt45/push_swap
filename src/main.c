@@ -39,6 +39,11 @@ int		main(int argc, char **argv)
 {
 	t_ps_env	*ps_env;
 
+	if (argc == 1)
+	{
+		printf("Usage : [./checker] [option] [range]\n");
+		return (-1);
+	}
 	if (!(ps_env = init_checker(argc, argv)))
 		return (-1);
 	start_checker(ps_env);

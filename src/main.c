@@ -38,7 +38,9 @@ void	print_stack_a(t_ps_env *ps_env)
 int		main(int argc, char **argv)
 {
 	t_ps_env	*ps_env;
+	int			i;
 
+	i = 1;
 	if (argc == 1)
 	{
 		printf("Usage : [./checker] [option] [range]\n");
@@ -46,5 +48,8 @@ int		main(int argc, char **argv)
 	}
 	if (!(ps_env = init_checker(argc, argv)))
 		return (-1);
-	start_checker(ps_env);
+	// start_checker(ps_env);
+	while (++i < ps_env->argc)
+		push_back(&ps_env->stack_a, atoi(ps_env->argv[i]));
+	push_swap(ps_env);
 }

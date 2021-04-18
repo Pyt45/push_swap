@@ -1,8 +1,8 @@
-NAME := push_swap
+NAME := checker
 
 PUSH_SWAP_LIB := push_swap.a
 
-SRCS := src/stack_utils.c src/checker_init.c \
+SRCS := src/stack_utils.c src/push_swap.c src/checker_init.c \
 		src/get_next_line.c src/get_next_line_utils.c 
 
 FLAGS := 

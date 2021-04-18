@@ -33,7 +33,7 @@ void    push_swap_ko(t_ps_env *ps_env)
 {
     destroy_ps_env(ps_env);
     // write(2, "ko\n", 3);
-    printf("\033[1;31mko\033[0m\n");
+    printf("\033[1;31mKO\033[0m\n");
     exit(EXIT_SUCCESS);
 }
 
@@ -45,13 +45,29 @@ void    swap_a(t_ps_env *ps_env)
 
     new_head = ps_env->stack_a->next;
     ps_env->stack_a->next = new_head->next;
-    // ps_env->stack_a->next->prev = ps_env->stack_a;
+    ps_env->stack_a->next->prev = ps_env->stack_a; // h
     new_head->next = ps_env->stack_a;
     ps_env->stack_a->prev = new_head;
     ps_env->stack_a = new_head;
 	if (ps_env->visual)
 		print_stack_a(ps_env);
 }
+
+// void	swap_b(t_ps_env *ps_env)
+// {
+// 	if (!ps_env->stack_b || !ps_env->stack_b->next)
+// 		push_swap_ko(ps_env);
+// 	t_stack *new_head;
+
+// 	new_head = ps_env->stack_b->next;
+// 	ps_env->stack_b->next = new_head->next;
+// 	// ps_env->stack_b->next->prev = ps_env->stack_b;
+// 	new_head->next = ps_env->stack_b;
+// 	ps_env->stack_b->prev = new_head;
+// 	ps_env->stack_b = new_head;
+// 	if (ps_env->visual)
+// 		print_stack_a(ps_env);
+// }
 
 void    rotate_a(t_ps_env *ps_env)
 {
@@ -64,7 +80,7 @@ void    rotate_a(t_ps_env *ps_env)
     while (tmp->next)
         tmp = tmp->next;
     tmp->next = ps_env->stack_a;
-    if (ps_env->stack_a->prev)
+    if (!ps_env->stack_a->prev)
         ps_env->stack_a->prev = tmp;
     ps_env->stack_a->next = NULL;
     ps_env->stack_a = new_head;
@@ -79,10 +95,11 @@ void    rotate_a(t_ps_env *ps_env)
 
 void    push_b(t_ps_env *ps_env)
 {
+    t_stack **tmp;
+
     if (!ps_env->stack_a)
 		return ;
     // push_swap_ko(ps_env);
-    t_stack **tmp;
 	tmp = &ps_env->stack_a;
 	if ((*tmp) && (*tmp)->next)
 	{
@@ -190,7 +207,7 @@ void    rotate_b(t_ps_env *ps_env)
     while (tmp->next)
         tmp = tmp->next;
     tmp->next = ps_env->stack_b;
-    if (ps_env->stack_b->prev)
+    if (!ps_env->stack_b->prev)
         ps_env->stack_b->prev = tmp;
     ps_env->stack_b->next = NULL;
     ps_env->stack_b = new_head;
@@ -206,8 +223,9 @@ void    swap_b(t_ps_env *ps_env)
 
     new_head = ps_env->stack_b->next;
     ps_env->stack_b->next = new_head->next;
+	 ps_env->stack_b->next->prev = ps_env->stack_b; // h 3
     new_head->next = ps_env->stack_b;
-	ps_env->stack_a->prev = new_head;
+	ps_env->stack_b->prev = new_head;
     ps_env->stack_b = new_head;
 	if (ps_env->visual)
 		print_stack_a(ps_env);
@@ -235,6 +253,7 @@ void    reverse_rotate_a(t_ps_env *ps_env)
     tmp->next = ps_env->stack_a;
     tmp->prev->next = NULL;
     ps_env->stack_a->prev = tmp;
+	tmp->prev = NULL;
     ps_env->stack_a = tmp;
 	if (ps_env->visual)
 		print_stack_a(ps_env);
@@ -254,6 +273,7 @@ void    reverse_rotate_b(t_ps_env *ps_env)
     tmp->next = ps_env->stack_b;
     tmp->prev->next = NULL;
     ps_env->stack_b->prev = tmp;
+	tmp->prev = NULL; // h 2
     ps_env->stack_b = tmp;
 	if (ps_env->visual)
 		print_stack_a(ps_env);
@@ -307,7 +327,7 @@ void    do_op(t_ps_env *ps_env, char *line)
     else
 	{
 		printf("\033[1;31mError\033[0m\n");
-		exit(127);
+		exit(1);
 	}
 }
 
@@ -358,9 +378,9 @@ void	check_if_stack_is_sorted(t_ps_env *ps_env)
 		}
 	}
 	if (count == stack_len)
-		printf("\033[1;32mok\033[0m\n");
+		printf("\033[1;32mOK\033[0m\n");
 	else
-		printf("\033[1;31mko\033[0m\n");
+		printf("\033[1;31mKO\033[0m\n");
 }
 
 static void	ft_free(char **data, int argc)
@@ -456,11 +476,17 @@ void    start_checker(t_ps_env *ps_env)
 	ps_env->len_a = 10;
     (ps_env->visual) ? print_stack_a(ps_env) : 0;
     r = 1;
+	// system("clear");
     while (r)
     {
         r = get_next_line(0, &op);
 		push_back_inst(&ps_env->inst, op);
-        if (!strcmp(op, "end"))
+        // if (!strcmp(op, "end"))
+		// {
+		// 	check_if_stack_is_sorted(ps_env);
+        //     break ;
+		// }
+		if (r == 0)
 		{
 			check_if_stack_is_sorted(ps_env);
             break ;

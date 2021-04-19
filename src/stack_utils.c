@@ -59,6 +59,19 @@ t_stack		*getStack(t_stack **root, int data)
 	return (NULL);
 }
 
+t_stack		*getStackPos(t_stack **root, int pos)
+{
+	t_stack		*tmp;
+
+	tmp = *root;
+	while (tmp && pos)
+	{
+		pos--;
+		tmp = tmp->next;
+	}
+	return tmp;
+}
+
 int		back(t_stack *stack)
 {
 	while (stack->next)

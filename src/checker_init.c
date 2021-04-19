@@ -331,36 +331,6 @@ void    do_op(t_ps_env *ps_env, char *line)
 	}
 }
 
-t_inst	*create_inst(char *op)
-{
-	t_inst	*new;
-
-	new = (t_inst *)malloc(sizeof(t_inst));
-	if (new)
-	{
-		new->op = strdup(op);
-		new->next = NULL;
-		new->prev = NULL;
-	}
-	return (new);
-}
-
-void	push_back_inst(t_inst **root, char *op)
-{
-	t_inst	*new;
-
-	new = create_inst(op);
-	if (!(*root))
-	{
-		*root = new;
-		return ;
-	}
-	while((*root)->next)
-		(*root) = (*root)->next;
-	(*root)->next = new;
-	new->prev = *root;
-}
-
 void	check_if_stack_is_sorted(t_ps_env *ps_env)
 {
 	// ra, rb,
@@ -480,17 +450,16 @@ void    start_checker(t_ps_env *ps_env)
     while (r)
     {
         r = get_next_line(0, &op);
-		push_back_inst(&ps_env->inst, op);
-        // if (!strcmp(op, "end"))
-		// {
-		// 	check_if_stack_is_sorted(ps_env);
-        //     break ;
-		// }
-		if (r == 0)
+        if (!strcmp(op, "end"))
 		{
 			check_if_stack_is_sorted(ps_env);
             break ;
 		}
+		/*if (r == 0)
+		{
+			check_if_stack_is_sorted(ps_env);
+            break ;
+		}*/
         do_op(ps_env, op);
         // (ps_env->visual) ? print_stack_a(ps_env) : 0;
     }

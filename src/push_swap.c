@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaqlzim <aaqlzim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:11:11 by aaqlzim           #+#    #+#             */
-/*   Updated: 2021/04/18 16:21:35 by aaqlzim          ###   ########.fr       */
+/*   Updated: 2021/04/18 19:48:31 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+t_inst	*create_inst(char *op)
+{
+	t_inst	*new;
+
+	new = (t_inst *)malloc(sizeof(t_inst));
+	if (new)
+	{
+		new->op = strdup(op);
+		new->next = NULL;
+		new->prev = NULL;
+	}
+	return (new);
+}
+
+void	push_back_inst(t_inst **root, char *op)
+{
+	t_inst	*new;
+
+	new = create_inst(op);
+	if (!(*root))
+	{
+		*root = new;
+		return ;
+	}
+	while((*root)->next)
+		(*root) = (*root)->next;
+	(*root)->next = new;
+	new->prev = *root;
+}
 
 void	push_swap(t_ps_env *ps_env)
 {

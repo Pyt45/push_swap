@@ -1,0 +1,8 @@
+Bonus:
+    add option -v: to display stack status after each operation
+    add option -f: to read instruction from a file
+    add option -c: to print the last operation in color
+    add option -s: to make the stack sort itself
+    add option -h: display help text
+    add option -g: to generate a random numbers
+    add option -V: to visualize the work with push_swap (using eaither SDL or minilibX)

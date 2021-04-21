@@ -73,10 +73,17 @@ void print_graph(graph *g) {
 	}
 }
 
+char	find_first_dup(char *str, int i, char c)
+{
+	if (str[i] != c)
+		return (find_first_dup(str, i + 1, str[i]));
+	return (str[i]);
+}
 
 int		main()
 {
-	graph	g;
-	read_graph(&g, 1);
-	print_graph(&g);
+	// graph	g;
+	// read_graph(&g, 1);
+	// print_graph(&g);
+	printf("%c\n", find_first_dup("ayouba", 0, 'a'));
 }

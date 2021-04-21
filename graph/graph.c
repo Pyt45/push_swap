@@ -82,8 +82,8 @@ char	find_first_dup(char *str, int i, char c)
 
 int		main()
 {
-	// graph	g;
-	// read_graph(&g, 1);
-	// print_graph(&g);
-	printf("%c\n", find_first_dup("ayouba", 0, 'a'));
+	graph	g;
+	read_graph(&g, 0);
+	print_graph(&g);
+	// printf("%c\n", find_first_dup("ayouba", 0, 'a'));
 }
